@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInventory : ScriptableObject
+public class PlayerInventory : MonoBehaviour
 {
     //ID -> cantidad
     private Dictionary<int, int> inventory = new Dictionary<int, int>();

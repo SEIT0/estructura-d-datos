@@ -4,7 +4,7 @@ using UnityEngine;
 
 //Aca tenemos otro asset que contiene todos los Items posibles
 [CreateAssetMenu(fileName = "ItemListSO", menuName = "ScriptableObjects/ItemList")]
-public class ItemListSO : ScriptableObject
+public class ItemListSO : MonoBehaviour
 {
     //Usamos un array porque no vamos a modificarlo en runtime
     public ItemSO[] items;

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Item>k__BackingField:
     id: 0
-    name: 
-    price: 0
+    name: Espada
+    price: 50
     sprite: {fileID: 0}

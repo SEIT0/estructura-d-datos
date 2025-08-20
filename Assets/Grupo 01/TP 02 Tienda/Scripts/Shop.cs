@@ -26,7 +26,7 @@ public class Shop : MonoBehaviour
             itemStock.Add(item.ID, new StoreItem(item, 99));
         }
     }
-    public bool TryBuy(int itemId)
+    public bool TryToBuy(int itemId)
     {
         if (!itemStock.ContainsKey(itemId)) return false;
 
@@ -38,7 +38,7 @@ public class Shop : MonoBehaviour
             playerMoney -= storeItem.item.Price;
             storeItem.quantity--;
 
-            playerInventory.AddItem(storeItem.item); // lo agregamos al inventario del player
+            playerInventory.AddItem(storeItem.item); //Se agrega al inventario del player
             Debug.Log($"Compraste {storeItem.item.ItemName}");
             return true;
         }
