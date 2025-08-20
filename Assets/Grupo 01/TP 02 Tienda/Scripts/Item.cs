@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+//Hacemos visible la clase en Inspector
+//Si estamos usando System, podemos obviarloy poner [Serializable]
+[System.Serializable]
+public class Item
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //Ocultamos el ID porque se va a setear automaticamente
+    [HideInInspector] public int id;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //Las otras variables si son publicas
+    public string name;
+    public int price;
+    public Sprite sprite;
 }
