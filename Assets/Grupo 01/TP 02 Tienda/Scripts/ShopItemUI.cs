@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Buttons : MonoBehaviour
+public class ShopItemUI : MonoBehaviour
 {
     [SerializeField] private Image icon;
     [SerializeField] private TMP_Text nameText;
@@ -27,7 +27,7 @@ public class Buttons : MonoBehaviour
 
     void OnBuy()
     {
-        shop.TryBuy(currentItem.ID);
+        shop.TryToBuy(currentItem.ID);
     }
 
 }
