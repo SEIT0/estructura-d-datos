@@ -14,7 +14,6 @@ public class SimpleListButton : MonoBehaviour
         simpleList = new SimpleList<string>();
         UpdateDisplay();
     }
-
     public void AddButton()
     {
         if (!string.IsNullOrEmpty(inputField.text))
@@ -48,13 +47,13 @@ public class SimpleListButton : MonoBehaviour
             inputField.text = "";
             UpdateDisplay();
         }
+        else
+        {
+            bool removed = simpleList.RemoveLast();
+            UpdateDisplay();
+        }
     }
 
-    public void RemoveLastButton()
-    {
-        bool removed = simpleList.RemoveLast();        
-        UpdateDisplay();
-    }
 
     public void ClearButton()
     {
@@ -71,5 +70,6 @@ public class SimpleListButton : MonoBehaviour
     private void UpdateDisplay()
     {
         displayText.text = "-" + simpleList.ToString();
+        displayText.text += "\nCantidad de elementos: " + simpleList.Count;
     }
 }
