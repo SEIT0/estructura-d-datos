@@ -1,5 +1,6 @@
-using System.Collections.Generic;
 using NUnit.Framework;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,8 +8,9 @@ public class PlayerInventory : MonoBehaviour
 {
     //ID -> cantidad
     private Dictionary<int, int> inventory = new Dictionary<int, int>();
-    public Text displayText;              // Mostrar la lista y mensajes
-    public int Count = 0;                                     
+    public int Count = 0;
+    [SerializeField] private TMP_Text Inventory;
+    [SerializeField] private ItemListSO allItems;
 
     void Start()
     {
@@ -34,12 +36,18 @@ public class PlayerInventory : MonoBehaviour
 
     public void RemoveItem(ItemSO item)
     {
-        if (!inventory.ContainsKey(item.ID)) return;
+        if (!inventory.ContainsKey(item.ID))
+        {
+            return;
+        }
 
         inventory[item.ID]--;
         if (inventory[item.ID] <= 0)
+        {
             inventory.Remove(item.ID);
-            Count --;
+        }
+
+        Count --;
 
         countItems();
     }
@@ -49,6 +57,21 @@ public class PlayerInventory : MonoBehaviour
     }
     public void countItems()
     {
-        displayText.text = "Elementos: " + Count.ToString();
+        string text = "Inventory:\n";
+
+        for (int i = 0; i < inventory.Keys.Count; i++)
+        {
+            int itemId = new List<int>(inventory.Keys)[i];   // saco el ID en la posición i
+            int cantidad = inventory[itemId];                // accedo a la cantidad con ese ID
+
+            ItemSO item = allItems.items[itemId];
+            if (item != null)
+            {
+                text += $"{item.ItemName} x{cantidad}\n";
+            }
+        }
+
+        Inventory.text = text;
+
     }
 }

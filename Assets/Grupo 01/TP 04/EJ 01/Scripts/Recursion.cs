@@ -39,7 +39,7 @@ public class Recursion : MonoBehaviour
     {
         if (int.TryParse(inputField.text, out int n) && n >= 0)
         {
-            resultadoText.text = $"La suma es: {SumaRecursiva(n -1)}";
+            resultadoText.text = $"La suma es: {SumaRecursiva(n - 1)}";
         }
         else
         {
@@ -91,7 +91,7 @@ public class Recursion : MonoBehaviour
 
         int cantidadX = (nivel * 2) - 1;
         int espacios = altura - nivel;
-        string linea = new string (' ', espacios * 2) + new string('x', cantidadX) + new string(' ', espacios * 2) + "\n";
+        string linea = new string(' ', espacios * 2) + new string('x', cantidadX) + new string(' ', espacios * 2) + "\n";
 
         return PiramideRecursiva(altura, nivel + 1, resultado + linea);
     }
