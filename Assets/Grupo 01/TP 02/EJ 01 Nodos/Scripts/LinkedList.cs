@@ -14,8 +14,7 @@ public class MyLinkedList<T> : ISimpleList<T>
         tail = null;
         Count = 0;
     }
-
-    //ISimpleList<T>
+    
     public T this[int index]
     {
         get
@@ -31,8 +30,7 @@ public class MyLinkedList<T> : ISimpleList<T>
             node.Data = value;
         }
     }
-
-    //ISimpleList<T>
+    
     public void Add(T value)
     {
         var newNode = new MisNodos<T>(value);
