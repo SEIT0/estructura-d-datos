@@ -5,9 +5,9 @@ using System.Collections;
 
 public class ListButtom : MonoBehaviour
 {
-    public Text displayText;              // Mostrar la lista y mensajes
-    public InputField inputField;         // Escribir el texto, Add y Remove
-    public InputField addRangeInputField; // Escribir varios elementos separados por coma, AddRange
+    public Text displayText;              //Mostrar la lista y mensajes
+    public InputField inputField;         //Escribir el texto, Add y Remove
+    public InputField addRangeInputField; //Escribir varios elementos separados por coma, AddRange
 
     private MyLinkedList<string> list;
 

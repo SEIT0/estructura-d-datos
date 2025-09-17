@@ -62,18 +62,12 @@ public class PlayerInventory : MonoBehaviour
     {
         string text = "Inventory:\n";
 
-        for (int i = 0; i < inventory.Keys.Count; i++)
+        foreach (var key in inventory.Keys)
         {
-            int itemId = new List<int>(inventory.Keys)[i];   //saco el ID en la posición i
-            int cantidad = inventory[itemId];                //accedo a la cantidad con ese ID
-
-            ItemSO item = allItems.items[itemId];
-            if (item != null)
-            {
-                text += $"{item.ItemName} x{cantidad}\n";
-            }
+            int cantidad = inventory[key];
+            ItemSO item = allItems.items[key];
+            text += $"{item.ItemName} x{cantidad}\n";
         }
-
         Inventory.text = text;
 
     }
