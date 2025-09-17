@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: "Assets/Grupo 01/Men\xFA/Men\xFA.unity"
     guid: 30674db51dbd7f94fb0cc2ac8107d3da
   - enabled: 1
-    path: Assets/Grupo 01/TP 01 SimpleList/Scenes/TP01 SimpleList.unity
+    path: Assets/Grupo 01/TP 01 SimpleList/Scenes/EJ01 SimpleList.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
     path: Assets/Grupo 01/TP 02/EJ 01 Nodos/Scenes/TP02 LinkedList.unity
