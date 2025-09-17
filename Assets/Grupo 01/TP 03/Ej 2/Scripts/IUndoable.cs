@@ -28,7 +28,11 @@ public struct TransformSnapshot
 
     public void Apply()
     {
-        if (Target == null) return;
+        if (Target == null)
+        {
+            return;
+        }
+
         Target.localPosition = LocalPosition;
         Target.localRotation = LocalRotation;
         Target.localScale = LocalScale;

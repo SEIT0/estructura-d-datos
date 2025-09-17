@@ -13,7 +13,6 @@ public class Shop : MonoBehaviour
     [SerializeField] private int playerMoney = 100;
     [SerializeField] private PlayerInventory playerInventory;
     [SerializeField] private TMP_Text moneyText;
-
     [SerializeField] private Transform contentParent;
     [SerializeField] private ShopItemUI shopItemPrefab;
 
@@ -28,14 +27,16 @@ public class Shop : MonoBehaviour
     void LoadItems()
     {
         foreach (Transform child in contentParent)
+        {
             Destroy(child.gameObject);
+        }
 
         list = new SimpleList<ItemSO>();
         list.AddRange(allItems.items);
 
         SortItems(SortCriteria.Precio, SortAlgorithm.Bubble);
 
-        // Crear stock y UI
+        //Crear stock y UI
         itemStock = new Dictionary<int, StoreItem>();
         for (int i = 0; i < list.Count; i++)
         {
@@ -77,7 +78,9 @@ public class Shop : MonoBehaviour
         }
 
         foreach (Transform child in contentParent)
+        {
             Destroy(child.gameObject);
+        }
 
         for (int i = 0; i < list.Count; i++)
         {
@@ -107,15 +110,21 @@ public class Shop : MonoBehaviour
 
     public bool TryToSellFor(int itemId, int priceToGive)
     {
-        if (!playerInventory.HasItem(itemId)) return false;
+        if (!playerInventory.HasItem(itemId))
+        {
+            return false;
+        }
 
-        var storeItem = itemStock[itemId];
-        playerInventory.RemoveItem(storeItem.item);
-        playerMoney += priceToGive;
-        storeItem.quantity++;
-        UpdateMoneyUI();
-        Debug.Log($"Vendiste {storeItem.item.ItemName} por ${priceToGive}");
-        return true;
+        else
+        {
+            var storeItem = itemStock[itemId];
+            playerInventory.RemoveItem(storeItem.item);
+            playerMoney += priceToGive;
+            storeItem.quantity++;
+            UpdateMoneyUI();
+            Debug.Log($"Vendiste {storeItem.item.ItemName} por ${priceToGive}");
+            return true;
+        }
     }
 
     void UpdateMoneyUI()

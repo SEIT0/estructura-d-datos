@@ -69,25 +69,46 @@ public class Recursion : MonoBehaviour
 
     int Fibonacci(int n)
     {
-        if (n <= 1) return n;
-        return Fibonacci(n - 1) + Fibonacci(n - 2);
+        if (n <= 1)
+        {
+            return n;
+        }
+        else
+        {
+            return Fibonacci(n - 1) + Fibonacci(n - 2);
+        }
     }
 
     int Factorial(int n)
     {
-        if (n <= 1) return 1;
-        return n * Factorial(n - 1);
+        if (n <= 1)
+        {
+            return 1;
+        }
+        else
+        {
+            return n * Factorial(n - 1);
+        }
     }
 
     int SumaRecursiva(int n)
     {
-        if (n <= 0) return 0;
-        return n + SumaRecursiva(n - 1);
+        if (n <= 0)
+        {
+            return 0;
+        }
+        else
+        {
+            return n + SumaRecursiva(n - 1);
+        }
     }
 
     string PiramideRecursiva(int altura, int nivel, string resultado)
     {
-        if (nivel > altura) return resultado;
+        if (nivel > altura)
+        {
+            return resultado;
+        }
 
         int cantidadX = (nivel * 2) - 1;
         int espacios = altura - nivel;
@@ -98,8 +119,16 @@ public class Recursion : MonoBehaviour
 
     bool EsPalindromo(string texto, int inicio, int fin)
     {
-        if (inicio >= fin) return true;
-        if (texto[inicio] != texto[fin]) return false;
+        if (inicio >= fin)
+        {
+            return true;
+        }
+
+        if (texto[inicio] != texto[fin])
+        {
+            return false;
+        }
+
         return EsPalindromo(texto, inicio + 1, fin - 1);
     }
 }

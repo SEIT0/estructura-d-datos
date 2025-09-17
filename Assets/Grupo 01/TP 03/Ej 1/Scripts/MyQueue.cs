@@ -15,17 +15,24 @@ public class MyQueue<T>
     public T Dequeue()
     {
         if (elements.Count == 0)
+        {
             throw new InvalidOperationException("La cola está vacía");
+        }
 
-        T item = elements[0];
-        elements.RemoveAt(0);
-        return item;
+        else
+        {
+            T item = elements[0];
+            elements.RemoveAt(0);
+            return item;
+        }
     }
 
     public T Peek()
     {
         if (elements.Count == 0)
+        {
             throw new InvalidOperationException("La cola está vacía");
+        }
 
         return elements[0];
     }
@@ -58,9 +65,12 @@ public class MyQueue<T>
             return false;
         }
 
-        item = elements[0];
-        elements.RemoveAt(0);
-        return true;
+        else
+        {
+            item = elements[0];
+            elements.RemoveAt(0);
+            return true;
+        }
     }
 
     public bool TryPeek(out T item)
@@ -71,7 +81,10 @@ public class MyQueue<T>
             return false;
         }
 
-        item = elements[0];
-        return true;
+        else
+        {
+            item = elements[0];
+            return true;
+        }
     }
 }

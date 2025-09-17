@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour
 {
-    //ID -> cantidad
+
     private Dictionary<int, int> inventory = new Dictionary<int, int>();
     public int Count = 0;
     [SerializeField] private TMP_Text Inventory;
@@ -41,10 +41,13 @@ public class PlayerInventory : MonoBehaviour
             return;
         }
 
-        inventory[item.ID]--;
-        if (inventory[item.ID] <= 0)
+        else
         {
-            inventory.Remove(item.ID);
+            inventory[item.ID]--;
+            if (inventory[item.ID] <= 0)
+            {
+                inventory.Remove(item.ID);
+            }
         }
 
         Count --;
@@ -61,8 +64,8 @@ public class PlayerInventory : MonoBehaviour
 
         for (int i = 0; i < inventory.Keys.Count; i++)
         {
-            int itemId = new List<int>(inventory.Keys)[i];   // saco el ID en la posición i
-            int cantidad = inventory[itemId];                // accedo a la cantidad con ese ID
+            int itemId = new List<int>(inventory.Keys)[i];   //saco el ID en la posición i
+            int cantidad = inventory[itemId];                //accedo a la cantidad con ese ID
 
             ItemSO item = allItems.items[itemId];
             if (item != null)

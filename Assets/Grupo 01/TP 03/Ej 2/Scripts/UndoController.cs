@@ -13,15 +13,15 @@ public class UndoController : MonoBehaviour
     public float scaleSpeed = 1.5f;
 
     [Header("Undo")]
-    public KeyCode undoKey = KeyCode.Z; // tecla de Undo
+    public KeyCode undoKey = KeyCode.Z; //tecla de Undo
     public float minMoveDelta = 0.05f;
     public float minRotDelta = 1f;
     public float minScaleDelta = 0.05f;
 
-    private MyStack<IUndoable> _history = new MyStack<IUndoable>();
-    private TransformSnapshot? _lastSnapshot;
+    private MyStack<IUndoable> history = new MyStack<IUndoable>();
+    private TransformSnapshot? lastSnapshot;
 
-    // Nuevas variables para detectar acciones únicas
+
     private bool isMoving = false;
     private bool isRotating = false;
     private bool isScaling = false;
@@ -31,7 +31,9 @@ public class UndoController : MonoBehaviour
     private void Awake()
     {
         if (target == null)
+        {
             target = transform;
+        }
 
         UpdateUI();
     }
@@ -42,7 +44,7 @@ public class UndoController : MonoBehaviour
         bool rotatedThisFrame = false;
         bool scaledThisFrame = false;
 
-        // Movimiento
+
         Vector3 move = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0f);
         if (move.sqrMagnitude > 0f)
         {
@@ -60,7 +62,7 @@ public class UndoController : MonoBehaviour
             isMoving = false;
         }
 
-        // Rotación
+
         float rot = 0f;
         if (Input.GetKey(KeyCode.Q)) rot += 1f;
         if (Input.GetKey(KeyCode.E)) rot -= 1f;
@@ -80,7 +82,7 @@ public class UndoController : MonoBehaviour
             isRotating = false;
         }
 
-        // Escala
+
         float scl = 0f;
         if (Input.GetKey(KeyCode.R)) scl += 1f;
         if (Input.GetKey(KeyCode.F)) scl -= 1f;
@@ -101,7 +103,7 @@ public class UndoController : MonoBehaviour
             isScaling = false;
         }
 
-        // Undo (solo una vez al presionar, no mantener presionado)
+        //Undo (solo una vez al presionar, no mantener presionado)
         if (Input.GetKeyDown(undoKey))
         {
             UndoLast();
@@ -123,8 +125,8 @@ public class UndoController : MonoBehaviour
                 Quaternion.Angle(endSnapshot.LocalRotation, start.LocalRotation) >= minRotDelta ||
                 Vector3.Distance(endSnapshot.LocalScale, start.LocalScale) >= minScaleDelta)
             {
-                _history.Push(new TransformUndoAction(start, description));
-                _lastSnapshot = endSnapshot;
+                history.Push(new TransformUndoAction(start, description));
+                lastSnapshot = endSnapshot;
             }
         }
 
@@ -133,11 +135,12 @@ public class UndoController : MonoBehaviour
 
     public void UndoLast()
     {
-        if (_history.TryPop(out var action))
+        if (history.TryPop(out var action))
         {
             action.Undo();
             UpdateUI();
         }
+
         else
         {
             Debug.Log("No hay más acciones para deshacer.");
@@ -146,11 +149,11 @@ public class UndoController : MonoBehaviour
 
     public string PeekDescription()
     {
-        return _history.TryPeek(out var action) ? action.Description : "(vacío)";
+        return history.TryPeek(out var action) ? action.Description : "(vacío)";
     }
 
     private void UpdateUI()
     {
-        Debug.Log($"Historial: {_history.Count} | Próxima: {PeekDescription()}");
+        Debug.Log($"Historial: {history.Count} | Próxima: {PeekDescription()}");
     }
 }

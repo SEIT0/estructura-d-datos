@@ -52,9 +52,16 @@ public class PlayerController : MonoBehaviour
 
     public void CumplirMisionActual()
     {
-        if (misiones.Count == 0) return;
-        misiones.Dequeue();
-        ActualizarMisionUI();
+        if (misiones.Count == 0)
+        {
+            return;
+        }
+
+        else
+        {
+            misiones.Dequeue();
+            ActualizarMisionUI();
+        }
     }
 
     void ActualizarMisionUI()
@@ -63,6 +70,7 @@ public class PlayerController : MonoBehaviour
         {
             uiMisionActual.text = "Misiones completadas";
         }
+
         else
         {
             uiMisionActual.text = "Misión:" + misiones.Peek();

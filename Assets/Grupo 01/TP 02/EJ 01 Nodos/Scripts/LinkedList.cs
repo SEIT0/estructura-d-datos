@@ -51,16 +51,34 @@ public class MyLinkedList<T> : ISimpleList<T>
     
     public void AddRange(MyLinkedList<T> values)
     {
-        if (values == null) throw new ArgumentNullException(nameof(values));
-        for (int i = 0; i < values.Count; i++)
-            Add(values[i]);
+        if (values == null)
+        {
+            throw new ArgumentNullException(nameof(values));
+        }
+
+        else
+        {
+            for (int i = 0; i < values.Count; i++)
+            {
+                Add(values[i]);
+            }
+        }
     }
     
     public void AddRange(T[] values)
     {
-        if (values == null) throw new ArgumentNullException(nameof(values));
-        for (int i = 0; i < values.Length; i++)
-            Add(values[i]);
+        if (values == null)
+        {
+            throw new ArgumentNullException(nameof(values));
+        }
+
+        else
+        {
+            for (int i = 0; i < values.Length; i++)
+            {
+                Add(values[i]);
+            }
+        }
     }
     
     public bool Remove(T value)
@@ -82,32 +100,51 @@ public class MyLinkedList<T> : ISimpleList<T>
     {
         var node = GetNodeAt(index);
         if (node == null) throw new ArgumentOutOfRangeException(nameof(index), "Index fuera de rango.");
-        RemoveNode(node);
+        else
+        {
+            RemoveNode(node);
+        }
     }
     
     public void Insert(int index, T value)
     {
         if (index < 0 || index > Count)
-            throw new ArgumentOutOfRangeException(nameof(index), "Index fuera de rango.");
-
-        if (index == Count) { Add(value); return; }
-
-        var current = GetNodeAt(index);
-        var newNode = new MisNodos<T>(value)
         {
-            Next = current,
-            Previous = current?.Previous
-        };
+            throw new ArgumentOutOfRangeException(nameof(index), "Index fuera de rango.");
+        }
 
-        if (current?.Previous != null)
-            current.Previous.Next = newNode;
         else
-            root = newNode;
+        {
+            if (index == Count)
+            {
+                Add(value);
+                return;
+            }
 
-        if (current != null)
-            current.Previous = newNode;
+            var current = GetNodeAt(index);
+            var newNode = new MisNodos<T>(value)
+            {
+                Next = current,
+                Previous = current?.Previous
+            };
 
-        Count++;
+            if (current?.Previous != null)
+            {
+                current.Previous.Next = newNode;
+            }
+
+            else
+            {
+                root = newNode;
+            }
+
+            if (current != null)
+            {
+                current.Previous = newNode;
+            }
+
+            Count++;
+        }
     }
 
     public bool IsEmpty()
@@ -124,19 +161,21 @@ public class MyLinkedList<T> : ISimpleList<T>
    
     public override string ToString()
     {
-        if (Count == 0) return "No hay empanadas";
-
-        var sb = new StringBuilder();
-        var current = root;
-        int i = 0;
-        while (current != null)
+         if (Count == 0) return "No hay empanadas";
+        else
         {
-            sb.Append(current.Data?.ToString());
-            if (i < Count - 1) sb.Append(", ");
-            current = current.Next;
-            i++;
+            var sb = new StringBuilder();
+            var current = root;
+            int i = 0;
+            while (current != null)
+            {
+                sb.Append(current.Data?.ToString());
+                if (i < Count - 1) sb.Append(", ");
+                current = current.Next;
+                i++;
+            }
+            return sb.ToString();
         }
-        return sb.ToString();
     }
     
     private MisNodos<T> GetNodeAt(int index)
@@ -149,6 +188,7 @@ public class MyLinkedList<T> : ISimpleList<T>
             for (int i = 0; i < index; i++) current = current.Next;
             return current;
         }
+
         else
         {
             var current = tail;
@@ -160,14 +200,24 @@ public class MyLinkedList<T> : ISimpleList<T>
     private void RemoveNode(MisNodos<T> node)
     {
         if (node.Previous != null)
+        {
             node.Previous.Next = node.Next;
+        }
+
         else
+        {
             root = node.Next;
+        }
 
         if (node.Next != null)
+        {
             node.Next.Previous = node.Previous;
+        }
+
         else
+        {
             tail = node.Previous;
+        }
 
         Count--;
     }
@@ -206,8 +256,9 @@ public class MyLinkedList<T> : ISimpleList<T>
             while (runner != null)
             {
                 if (comparison(runner.Data, minNode.Data) < 0)
+                {
                     minNode = runner;
-
+                }
                 runner = runner.Next;
             }
 
@@ -254,7 +305,9 @@ public class MyLinkedList<T> : ISimpleList<T>
         while (current != null && current.Next != null)
         {
             if (comparison(current.Data, current.Next.Data) > 0)
+            {
                 return false;
+            }
             current = current.Next;
         }
         return true;

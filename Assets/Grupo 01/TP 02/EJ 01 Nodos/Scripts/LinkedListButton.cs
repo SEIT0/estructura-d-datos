@@ -33,7 +33,9 @@ public class ListButtom : MonoBehaviour
         {
             string[] items = addRangeInputField.text.Split(',');
             for (int i = 0; i < items.Length; i++)
+            {
                 items[i] = items[i].Trim();
+            }
 
             list.AddRange(items);
             addRangeInputField.text = "";

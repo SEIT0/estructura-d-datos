@@ -8,8 +8,8 @@ public class ShopItemUI : MonoBehaviour
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private TMP_Text priceText;
     [SerializeField] private Button buyButton;
-    [SerializeField] private Button sellButton; // Nuevo botón para vender
-    [SerializeField] private TMP_Text sellButtonText; // Texto del botón vender
+    [SerializeField] private Button sellButton;
+    [SerializeField] private TMP_Text sellButtonText;
 
     private int itemId;
     private Shop shop;
@@ -24,7 +24,7 @@ public class ShopItemUI : MonoBehaviour
         nameText.text = item.ItemName;
         priceText.text = $"Comprar: ${item.Price}";
 
-        // Calcular precio de venta: 60% del original, redondeado
+        //Calcular precio de venta: 60% del original, redondeado
         sellPrice = Mathf.RoundToInt(item.Price * 0.6f);
         sellButtonText.text = $"Vender: ${sellPrice}";
 
