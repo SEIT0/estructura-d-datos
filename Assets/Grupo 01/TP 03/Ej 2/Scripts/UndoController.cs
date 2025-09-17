@@ -18,8 +18,7 @@ public class UndoController : MonoBehaviour
     public float minRotDelta = 1f;
     public float minScaleDelta = 0.05f;
 
-    private MyStack<IUndoable> history = new MyStack<IUndoable>();
-    private TransformSnapshot? lastSnapshot;
+    private MyStack<IUndoable> history = new MyStack<IUndoable>();    
 
 
     private bool isMoving = false;
@@ -125,8 +124,7 @@ public class UndoController : MonoBehaviour
                 Quaternion.Angle(endSnapshot.LocalRotation, start.LocalRotation) >= minRotDelta ||
                 Vector3.Distance(endSnapshot.LocalScale, start.LocalScale) >= minScaleDelta)
             {
-                history.Push(new TransformUndoAction(start, description));
-                lastSnapshot = endSnapshot;
+                history.Push(new TransformUndoAction(start, description));                
             }
         }
 
