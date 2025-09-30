@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-// Árbol binario de búsqueda genérico
+//Árbol binario de búsqueda genérico
 public class MyBST<T> where T : IComparable<T>
 {
     public BSTNode<T> Root { get; private set; }
@@ -41,7 +41,7 @@ public class MyBST<T> where T : IComparable<T>
         return GetHeight(node.Left) - GetHeight(node.Right);
     }
 
-    // Recorridos
+    //Recorridos
     public List<T> InOrder()
     {
         var result = new List<T>();

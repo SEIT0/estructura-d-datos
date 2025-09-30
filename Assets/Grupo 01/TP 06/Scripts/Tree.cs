@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class Tree : MonoBehaviour
 {
     private MyBST<int> bst;
     public TreeVisualizer visualizer;
-
+    public TMP_InputField inputField;
 
     void Start()
     {
@@ -30,7 +31,7 @@ public class Tree : MonoBehaviour
         Debug.Log("Balance factor de la raíz: " + bst.GetBalanceFactor(bst.Root));
 
         int height = bst.GetHeight();
-        float spread = Mathf.Pow(1.5f, height); // cuanto más alto, más ancho
+        float spread = Mathf.Pow(1.5f, height); //cuanto más alto, más ancho
         visualizer.DrawTree(bst.Root, new Vector2(0, 0), spread);
         CenterCameraOnTree(bst.GetHeight(), 16f);
 
@@ -41,12 +42,51 @@ public class Tree : MonoBehaviour
         Camera cam = Camera.main;
         cam.orthographic = true;
 
-        // Ajustar tamaño según altura del árbol
+        //Ajustar tamaño según altura del árbol
         cam.orthographicSize = height * 2f;
 
-        // Centrar la cámara en el origen (donde dibujás la raíz)
+        //Centrar la cámara en el origen
         cam.transform.position = new Vector3(0, -5, -10);
     }
 
+    public void InsertFromInput()
+    {
+        if (int.TryParse(inputField.text, out int value))
+        {
+            bst.Insert(value);
+            Redraw();
+        }
+    }
 
+    public void ShowInOrder()
+    {
+        Debug.Log("InOrder: " + string.Join(", ", bst.InOrder()));
+    }
+
+    public void ShowPreOrder()
+    {
+        Debug.Log("InOrder: " + string.Join(", ", bst.PreOrder()));
+    }
+
+    public void ShowPostOrder()
+    {
+        Debug.Log("InOrder: " + string.Join(", ", bst.PostOrder()));
+    }
+
+    public void ShowLevelOrder()
+    {
+        Debug.Log("InOrder: " + string.Join(", ", bst.LevelOrder()));
+    }
+
+    void Redraw()
+    {
+        foreach (Transform child in visualizer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        int height = bst.GetHeight();
+        float spread = Mathf.Pow(1.5f, height);
+        visualizer.DrawTree(bst.Root, new Vector2(0, 0), spread);
+    }
 }
