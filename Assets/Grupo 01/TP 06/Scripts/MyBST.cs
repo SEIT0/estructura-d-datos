@@ -4,7 +4,8 @@ using System.Collections.Generic;
 //Árbol binario de búsqueda genérico
 public class MyBST<T> where T : IComparable<T>
 {
-    public BSTNode<T> Root { get; private set; }
+    public BSTNode<T> Root { get; protected set; }
+
 
     public void Insert(T value)
     {
