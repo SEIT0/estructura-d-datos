@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 
-//Árbol binario de búsqueda genérico
 public class MyBST<T> where T : IComparable<T>
 {
     public BSTNode<T> Root { get; protected set; }

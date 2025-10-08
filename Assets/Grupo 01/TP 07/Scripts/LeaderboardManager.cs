@@ -1,15 +1,14 @@
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Text;
 
 public class LeaderboardManager : MonoBehaviour
 {
-    public TextMeshProUGUI leaderboardText; // Referencia al TMP en la escena
+    public TextMeshProUGUI leaderboardText; 
     private MyAVL<int> avlTree = new MyAVL<int>();
 
     void Start()
     {
-        // Inicializar con 100 puntajes aleatorios
         for (int i = 0; i < 100; i++)
         {
             int randomScore = Random.Range(0, 1000);
@@ -27,23 +26,22 @@ public class LeaderboardManager : MonoBehaviour
 
     private void RefreshUI()
     {
-        // Obtener lista ordenada de mayor a menor
-        List<int> scores = new List<int>();
+        SimpleList<int> scores = new SimpleList<int>();
         GetDescending(avlTree.Root, scores);
 
         // Construir string
-        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        StringBuilder sb = new StringBuilder();
         int rank = 1;
-        foreach (int score in scores)
+        for (int i = 0; i < scores.Count; i++)
         {
-            sb.AppendLine(rank + ". " + score);
+            sb.AppendLine(rank + ". " + scores[i]);
             rank++;
         }
 
         leaderboardText.text = sb.ToString();
     }
 
-    private void GetDescending(BSTNode<int> node, List<int> list)
+    private void GetDescending(BSTNode<int> node, SimpleList<int> list)
     {
         if (node == null) return;
         GetDescending(node.Right, list);
@@ -51,7 +49,7 @@ public class LeaderboardManager : MonoBehaviour
         GetDescending(node.Left, list);
     }
 
-    // Métodos para los botones
+
     public void PrintPreOrder()
     {
         Debug.Log("PreOrder: " + string.Join(", ", avlTree.PreOrder()));

@@ -23,10 +23,8 @@ public class MyAVL<T> : MyBST<T> where T : IComparable<T>
         else
             return node; // no se permiten duplicados
 
-        // Actualizar altura
         UpdateHeight(node);
 
-        // Balancear
         return Balance(node, value);
     }
 
@@ -55,22 +53,22 @@ public class MyAVL<T> : MyBST<T> where T : IComparable<T>
     {
         int balance = GetBalance(node);
 
-        // Caso Izquierda - Izquierda
+        // Caso LL
         if (balance > 1 && value.CompareTo(node.Left.Value) < 0)
             return RotateRight(node);
 
-        // Caso Derecha - Derecha
+        // Caso RR
         if (balance < -1 && value.CompareTo(node.Right.Value) > 0)
             return RotateLeft(node);
 
-        // Caso Izquierda - Derecha
+        // Caso LR
         if (balance > 1 && value.CompareTo(node.Left.Value) > 0)
         {
             node.Left = RotateLeft(node.Left);
             return RotateRight(node);
         }
 
-        // Caso Derecha - Izquierda
+        // Caso RL
         if (balance < -1 && value.CompareTo(node.Right.Value) < 0)
         {
             node.Right = RotateRight(node.Right);
@@ -113,7 +111,6 @@ public class MyAVL<T> : MyBST<T> where T : IComparable<T>
     }
 }
 
-// Nodo especializado para AVL
 public class AVLNode<T> : BSTNode<T> where T : IComparable<T>
 {
     public int Height { get; set; }
