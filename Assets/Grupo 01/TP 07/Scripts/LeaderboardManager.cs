@@ -1,10 +1,14 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 using System.Text;
 
 public class LeaderboardManager : MonoBehaviour
 {
-    public TextMeshProUGUI leaderboardText; 
+    public TextMeshProUGUI leaderboardText;
+    public TMP_InputField scoreInputField;
+    public Button insertButton;
+
     private MyAVL<int> avlTree = new MyAVL<int>();
 
     void Start()
@@ -15,7 +19,22 @@ public class LeaderboardManager : MonoBehaviour
             avlTree.Insert(randomScore);
         }
 
+        insertButton.onClick.AddListener(OnInsertButtonClicked);
+
         RefreshUI();
+    }
+
+    private void OnInsertButtonClicked()
+    {
+        if (int.TryParse(scoreInputField.text, out int score))
+        {
+            AddScore(score);
+            scoreInputField.text = "";
+        }
+        else
+        {
+            Debug.LogWarning("Entrada inválida. Ingresá un número entero.");
+        }
     }
 
     public void AddScore(int score)
@@ -29,7 +48,6 @@ public class LeaderboardManager : MonoBehaviour
         SimpleList<int> scores = new SimpleList<int>();
         GetDescending(avlTree.Root, scores);
 
-        // Construir string
         StringBuilder sb = new StringBuilder();
         int rank = 1;
         for (int i = 0; i < scores.Count; i++)
@@ -48,8 +66,6 @@ public class LeaderboardManager : MonoBehaviour
         list.Add(node.Value);
         GetDescending(node.Left, list);
     }
-
-
     public void PrintPreOrder()
     {
         Debug.Log("PreOrder: " + string.Join(", ", avlTree.PreOrder()));
