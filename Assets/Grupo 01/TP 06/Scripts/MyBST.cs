@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
 
 public class MyBST<T> where T : IComparable<T>
 {
     public BSTNode<T> Root { get; protected set; }
-
 
     public void Insert(T value)
     {
@@ -41,15 +39,14 @@ public class MyBST<T> where T : IComparable<T>
         return GetHeight(node.Left) - GetHeight(node.Right);
     }
 
-    //Recorridos
-    public List<T> InOrder()
+    public SimpleList<T> InOrder()
     {
-        var result = new List<T>();
+        var result = new SimpleList<T>();
         InOrder(Root, result);
         return result;
     }
 
-    private void InOrder(BSTNode<T> node, List<T> result)
+    private void InOrder(BSTNode<T> node, SimpleList<T> result)
     {
         if (node == null) return;
         InOrder(node.Left, result);
@@ -57,14 +54,14 @@ public class MyBST<T> where T : IComparable<T>
         InOrder(node.Right, result);
     }
 
-    public List<T> PreOrder()
+    public SimpleList<T> PreOrder()
     {
-        var result = new List<T>();
+        var result = new SimpleList<T>();
         PreOrder(Root, result);
         return result;
     }
 
-    private void PreOrder(BSTNode<T> node, List<T> result)
+    private void PreOrder(BSTNode<T> node, SimpleList<T> result)
     {
         if (node == null) return;
         result.Add(node.Value);
@@ -72,14 +69,14 @@ public class MyBST<T> where T : IComparable<T>
         PreOrder(node.Right, result);
     }
 
-    public List<T> PostOrder()
+    public SimpleList<T> PostOrder()
     {
-        var result = new List<T>();
+        var result = new SimpleList<T>();
         PostOrder(Root, result);
         return result;
     }
 
-    private void PostOrder(BSTNode<T> node, List<T> result)
+    private void PostOrder(BSTNode<T> node, SimpleList<T> result)
     {
         if (node == null) return;
         PostOrder(node.Left, result);
@@ -87,12 +84,12 @@ public class MyBST<T> where T : IComparable<T>
         result.Add(node.Value);
     }
 
-    public List<T> LevelOrder()
+    public SimpleList<T> LevelOrder()
     {
-        var result = new List<T>();
+        var result = new SimpleList<T>();
         if (Root == null) return result;
 
-        Queue<BSTNode<T>> queue = new Queue<BSTNode<T>>();
+        MyQueue<BSTNode<T>> queue = new MyQueue<BSTNode<T>>();
         queue.Enqueue(Root);
 
         while (queue.Count > 0)
