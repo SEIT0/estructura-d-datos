@@ -35,12 +35,12 @@ public class GraphVisualizer : MonoBehaviour
 
                 var lr = lineObj.AddComponent<LineRenderer>();
                 lr.material = new Material(Shader.Find("Sprites/Default"));
-                lr.startColor = lr.endColor = Color.white;
+                lr.startColor = lr.endColor = Color.yellow;
                 lr.startWidth = lr.endWidth = 0.05f;
                 lr.positionCount = 2;
                 lr.SetPosition(0, fromNode.transform.position);
                 lr.SetPosition(1, toNode.transform.position);
-                lr.sortingOrder = -1;
+                lr.sortingOrder = 1;
 
                 // Crear texto con el peso (distancia)
                 var textObj = new GameObject($"Weight_{from}_{edge.Item1}");

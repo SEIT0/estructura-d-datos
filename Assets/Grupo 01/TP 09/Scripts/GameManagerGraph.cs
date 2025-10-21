@@ -27,9 +27,15 @@ public class GameManagerGraph : MonoBehaviour
             graph.AddVertex(node.planetName);
         }
 
-        // Conexiones manuales (vos decidís cuáles)
+        // Conexiones manuales 
+        AddConnection("Earth", "Moon");
         AddConnection("Earth", "Mars");
-        AddConnection("Mars", "Jupiter");
+        AddConnection("Earth", "Venus");
+        AddConnection("Venus", "Mercury");
+        AddConnection("Jupiter", "Mercury");
+        AddConnection("Jupiter", "Saturn");
+        AddConnection("Pluto", "Uranus");
+        AddConnection("Uranus", "Neptune");
         // Podés agregar más conexiones según tu mapa
     }
 
@@ -51,7 +57,14 @@ public class GameManagerGraph : MonoBehaviour
     public void SelectPlanet(string planetName)
     {
         selectedPath.Add(planetName);
-        uiText.text = $"Seleccionado: {string.Join(" -> ", selectedPath)}";
+        if (planetName == "Sun")
+        {
+            uiText.text = $"You really wanted to die";
+        }
+        else 
+        { 
+            uiText.text = $"Seleccionado: {string.Join(" -> ", selectedPath)}"; 
+        }
     }
 
     public void DeselectPlanet(string planetName)
