@@ -9,14 +9,12 @@ public class GraphVisualizer : MonoBehaviour
 
     void Start()
     {
-        // Detectar planetas en la escena
         planetNodes = new Dictionary<string, PlanetNode>();
         foreach (var node in Object.FindObjectsByType<PlanetNode>(FindObjectsSortMode.None))
         {
             planetNodes[node.planetName] = node;
         }
 
-        // Dibujar aristas
         DrawEdges();
     }
 
@@ -29,7 +27,6 @@ public class GraphVisualizer : MonoBehaviour
                 var fromNode = planetNodes[from];
                 var toNode = planetNodes[edge.Item1];
 
-                // Crear objeto para la línea
                 var lineObj = new GameObject($"Edge_{from}_{edge.Item1}");
                 lineObj.transform.parent = this.transform;
 
@@ -42,16 +39,14 @@ public class GraphVisualizer : MonoBehaviour
                 lr.SetPosition(1, toNode.transform.position);
                 lr.sortingOrder = 1;
 
-                // Crear texto con el peso (distancia)
                 var textObj = new GameObject($"Weight_{from}_{edge.Item1}");
                 textObj.transform.parent = this.transform;
                 var tmp = textObj.AddComponent<TextMeshPro>();
-                tmp.text = edge.Item2.ToString("F1"); // un decimal
+                tmp.text = edge.Item2.ToString("F1"); 
                 tmp.fontSize = 3;
                 tmp.alignment = TextAlignmentOptions.Center;
 
-                // Posicionar el texto en el medio de la línea
-                Vector3 midPoint = (fromNode.transform.position + toNode.transform.position) / 2;
+                Vector2 midPoint = (fromNode.transform.position + toNode.transform.position) / 2;
                 textObj.transform.position = midPoint;
             }
         }

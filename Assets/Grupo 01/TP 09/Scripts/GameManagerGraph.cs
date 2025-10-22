@@ -19,7 +19,6 @@ public class GameManagerGraph : MonoBehaviour
 
     void Start()
     {
-        // Detectar planetas en la escena
         planetNodes = new Dictionary<string, PlanetNode>();
         foreach (var node in Object.FindObjectsByType<PlanetNode>(FindObjectsSortMode.None))
         {
@@ -27,7 +26,6 @@ public class GameManagerGraph : MonoBehaviour
             graph.AddVertex(node.planetName);
         }
 
-        // Conexiones manuales 
         AddConnection("Earth", "Moon");
         AddConnection("Earth", "Mars");
         AddConnection("Earth", "Venus");
@@ -36,7 +34,7 @@ public class GameManagerGraph : MonoBehaviour
         AddConnection("Jupiter", "Saturn");
         AddConnection("Pluto", "Uranus");
         AddConnection("Uranus", "Neptune");
-        // Podés agregar más conexiones según tu mapa
+
     }
 
     private void AddConnection(string from, string to)
@@ -49,7 +47,6 @@ public class GameManagerGraph : MonoBehaviour
             );
 
             graph.AddEdge(from, (to, distance));
-            // Si querés que sea bidireccional:
             graph.AddEdge(to, (from, distance));
         }
     }

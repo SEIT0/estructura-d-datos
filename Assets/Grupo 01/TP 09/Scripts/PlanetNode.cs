@@ -12,7 +12,7 @@ public class PlanetNode : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         if (string.IsNullOrEmpty(planetName))
-            planetName = gameObject.name; // usa el nombre del objeto
+            planetName = gameObject.name; 
     }
 
     void OnMouseDown()
