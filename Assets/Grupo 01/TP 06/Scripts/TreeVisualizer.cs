@@ -16,6 +16,7 @@ public class TreeVisualizer : MonoBehaviour
         var textMesh = nodeObj.GetComponentInChildren<TextMeshProUGUI>();
         if (textMesh != null)
             textMesh.text = root.Value.ToString();
+        textMesh.fontSize = 2;
 
         //Hijo izquierdo
         if (root.Left != null)
@@ -42,11 +43,12 @@ public class TreeVisualizer : MonoBehaviour
         lr.positionCount = 2;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
-        lr.startWidth = 0.05f;
-        lr.endWidth = 0.05f;
+        lr.startWidth = 0.5f;
+        lr.endWidth = 0.5f;
         lr.material = new Material(Shader.Find("Sprites/Default"));
-        lr.startColor = Color.white;
-        lr.endColor = Color.white;
+        Color brown = new Color(0.55f, 0.27f, 0.07f);
+        lr.startColor = brown;
+        lr.endColor = brown;
         lr.sortingOrder = -1; //para que no tape los números
     }
 
