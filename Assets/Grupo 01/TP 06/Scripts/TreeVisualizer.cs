@@ -11,34 +11,40 @@ public class TreeVisualizer : MonoBehaviour
     {
         if (root == null) return;
 
-        //Instanciar nodo
+        //  Crear el nodo visual
         GameObject nodeObj = Instantiate(nodePrefab, position, Quaternion.identity, transform);
         var textMesh = nodeObj.GetComponentInChildren<TextMeshProUGUI>();
         if (textMesh != null)
+        {
             textMesh.text = root.Value.ToString();
-        textMesh.fontSize = 2;
+            textMesh.fontSize = 2;
+        }
 
-        //Hijo izquierdo
+        //  Dibujar el hijo izquierdo
         if (root.Left != null)
         {
             Vector2 leftPos = position + new Vector2(-spread, -ySpacing);
-            DrawLine(position, leftPos);
-            DrawTree(root.Left, leftPos, spread / 2f); //se va reduciendo
+            //  Pasamos el nodeObj.transform como "padre"
+            DrawLine(position, leftPos, nodeObj.transform);
+            DrawTree(root.Left, leftPos, spread / 2f);
         }
 
-        //Hijo derecho
+        //  Dibujar el hijo derecho
         if (root.Right != null)
         {
             Vector2 rightPos = position + new Vector2(spread, -ySpacing);
-            DrawLine(position, rightPos);
+            DrawLine(position, rightPos, nodeObj.transform);
             DrawTree(root.Right, rightPos, spread / 2f);
         }
     }
 
-    void DrawLine(Vector3 start, Vector3 end)
+    //  Ahora recibe un Transform (el padre del nodo)
+    void DrawLine(Vector3 start, Vector3 end, Transform parent)
     {
         var lineObj = new GameObject("Line");
-        lineObj.transform.parent = transform; //que quede organizado
+        //  Agrupamos la línea dentro del nodo padre
+        lineObj.transform.parent = parent;
+
         var lr = lineObj.AddComponent<LineRenderer>();
         lr.positionCount = 2;
         lr.SetPosition(0, start);
@@ -49,7 +55,6 @@ public class TreeVisualizer : MonoBehaviour
         Color brown = new Color(0.55f, 0.27f, 0.07f);
         lr.startColor = brown;
         lr.endColor = brown;
-        lr.sortingOrder = -1; //para que no tape los números
+        lr.sortingOrder = -1; // para que no tape los números
     }
-
 }
