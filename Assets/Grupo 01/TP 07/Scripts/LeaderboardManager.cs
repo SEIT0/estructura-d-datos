@@ -68,21 +68,29 @@ public class LeaderboardManager : MonoBehaviour
     }
     public void PrintPreOrder()
     {
-        Debug.Log("PreOrder: " + string.Join(", ", avlTree.PreOrder()));
+        string result = "PreOrder: " + string.Join(", ", avlTree.PreOrder());
+        leaderboardText.text = result;
+        Debug.Log(result);
     }
 
     public void PrintInOrder()
     {
-        Debug.Log("InOrder: " + string.Join(", ", avlTree.InOrder()));
+        string result = "InOrder: " + string.Join(", ", avlTree.InOrder());
+        leaderboardText.text = result;
+        Debug.Log(result);
     }
 
     public void PrintPostOrder()
     {
-        Debug.Log("PostOrder: " + string.Join(", ", avlTree.PostOrder()));
+        string result = "PostOrder: " + string.Join(", ", avlTree.PostOrder());
+        leaderboardText.text = result;
+        Debug.Log(result);
     }
 
     public void PrintLevelOrder()
     {
-        Debug.Log("LevelOrder: " + string.Join(", ", avlTree.LevelOrder()));
+        string result = "LevelOrder: " + string.Join(", ", avlTree.LevelOrder());
+        leaderboardText.text = result;
+        Debug.Log(result);
     }
 }
