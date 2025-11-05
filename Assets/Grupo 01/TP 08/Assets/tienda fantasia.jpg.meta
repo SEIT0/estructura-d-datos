@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      tienda fantasia_0: -9172197741214131624
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

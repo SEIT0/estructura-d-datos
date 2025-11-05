@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      botonPiedra2_0: 8846067401630099312
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

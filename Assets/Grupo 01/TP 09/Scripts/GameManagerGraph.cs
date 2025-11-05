@@ -104,6 +104,6 @@ public class GameManagerGraph : MonoBehaviour
             total += graph.GetWeight(selectedPath[i], selectedPath[i + 1]);
         }
 
-        uiText.text = $"Camino válido. Distancia total: {total:F2}";
+        uiText.text = $"Camino válido. Distancia total: {total:F1}";
     }
 }
