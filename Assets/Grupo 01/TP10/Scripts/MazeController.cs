@@ -72,6 +72,27 @@ public class MazeController : MonoBehaviour
             case CellType.Wall: color = Color.black; break;
             case CellType.Empty: color = Color.white; break;
         }
+        // Si ya tiene ese tipo, no hacer nada
+        if (cell.type == currentPaint) return;
+
+        // Si estamos poniendo entrada o salida, asegurarnos de que sea la única
+        if (currentPaint == CellType.Start)
+        {
+            foreach (var c in grid.grid)
+            {
+                if (c.type == CellType.Start)
+                    c.SetType(CellType.Empty, Color.white);
+            }
+        }
+        else if (currentPaint == CellType.End)
+        {
+            foreach (var c in grid.grid)
+            {
+                if (c.type == CellType.End)
+                    c.SetType(CellType.Empty, Color.white);
+            }
+        }
+
         cell.SetType(currentPaint, color);
     }
 
