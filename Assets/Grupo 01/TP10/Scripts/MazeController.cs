@@ -107,11 +107,29 @@ public class MazeController : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
         }
 
-        // Restaurar colores originales (opcional)
-        foreach (var step in path)
+        // Restaurar los colores de la grilla según el tipo de cada celda
+        RefreshGridColors();
+
+        // Eliminar el jugador al finalizar para que no tape la salida
+        if (player != null)
         {
-            if (step.type == CellType.Empty)
-                step.sr.color = Color.white;
+            Destroy(player);
+            player = null;
+        }
+    }
+
+    // Vuelve a aplicar colores a cada celda basado en su tipo (asegura que la salida/entrada se vean)
+    void RefreshGridColors()
+    {
+        foreach (var cell in grid.grid)
+        {
+            switch (cell.type)
+            {
+                case CellType.Start: cell.sr.color = Color.blue; break;
+                case CellType.End: cell.sr.color = Color.red; break;
+                case CellType.Wall: cell.sr.color = Color.black; break;
+                default: cell.sr.color = Color.white; break;
+            }
         }
     }
 
