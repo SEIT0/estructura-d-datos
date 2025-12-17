@@ -9,20 +9,17 @@ public class Cell : MonoBehaviour
 
     void OnMouseDown()
     {
-        // Llama al controlador para pintar esta celda
         Object.FindFirstObjectByType<MazeController>().PaintCell(this);
     }
 
     void OnMouseEnter()
     {
-        // Permite pintar manteniendo el botón izquierdo apretado y pasando sobre celdas
         if (Input.GetMouseButton(0))
             Object.FindFirstObjectByType<MazeController>().PaintCell(this);
     }
 
     void OnMouseDrag()
     {
-        // También manejar arrastre por si se necesita
         Object.FindFirstObjectByType<MazeController>().PaintCell(this);
     }
 

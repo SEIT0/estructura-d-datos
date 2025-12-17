@@ -39,7 +39,10 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene(6);
     }
-
+    public void Final()
+    {
+        SceneManager.LoadScene(7);
+    }
     public void VolverAlMenu()
     {
         SceneManager.LoadScene(0);

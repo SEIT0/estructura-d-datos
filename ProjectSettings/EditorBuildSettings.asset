@@ -26,5 +26,8 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/Grupo 01/TP 05/EJ 01/Scenes/Recursi\xF3n.unity"
     guid: aff3c134e3057d148b44ee43d8fce146
+  - enabled: 1
+    path: Assets/Grupo 01/TP10/Scene/TP Fiinal.unity
+    guid: f9b362e86bd89bb4daf5888e80ce51a5
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

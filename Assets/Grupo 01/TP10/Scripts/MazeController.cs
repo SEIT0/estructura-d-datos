@@ -32,10 +32,9 @@ public class MazeController : MonoBehaviour
         {
             statusText.text = "Hay solución";
 
-            // Pintar el camino en amarillo (sin tocar entrada/salida)
             foreach (var step in path)
             {
-                if (step.type == CellType.Empty) // no sobreescribir entrada/salida
+                if (step.type == CellType.Empty) // no sobreescribir entrada ni salida
                     step.sr.color = Color.yellow;
             }
 
@@ -72,10 +71,9 @@ public class MazeController : MonoBehaviour
             case CellType.Wall: color = Color.black; break;
             case CellType.Empty: color = Color.white; break;
         }
-        // Si ya tiene ese tipo, no hacer nada
+
         if (cell.type == currentPaint) return;
 
-        // Si estamos poniendo entrada o salida, asegurarnos de que sea la única
         if (currentPaint == CellType.Start)
         {
             foreach (var c in grid.grid)
@@ -100,6 +98,9 @@ public class MazeController : MonoBehaviour
     {
         if (player != null) Destroy(player);
         player = Instantiate(playerPrefab, path[0].transform.position, Quaternion.identity);
+        var playerSr = player.GetComponent<SpriteRenderer>() ?? player.GetComponentInChildren<SpriteRenderer>();
+        if (playerSr != null)
+            playerSr.color = Color.green;
 
         foreach (var step in path)
         {
@@ -107,10 +108,8 @@ public class MazeController : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
         }
 
-        // Restaurar los colores de la grilla según el tipo de cada celda
         RefreshGridColors();
 
-        // Eliminar el jugador al finalizar para que no tape la salida
         if (player != null)
         {
             Destroy(player);
@@ -118,7 +117,6 @@ public class MazeController : MonoBehaviour
         }
     }
 
-    // Vuelve a aplicar colores a cada celda basado en su tipo (asegura que la salida/entrada se vean)
     void RefreshGridColors()
     {
         foreach (var cell in grid.grid)
